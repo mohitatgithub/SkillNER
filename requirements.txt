@@ -8,3 +8,4 @@ furo
 sphinx-copybutton
 twine
 scipy
+Flask
