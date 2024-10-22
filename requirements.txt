@@ -1,7 +1,8 @@
+# numpy==1.21.6
 ipython
 pandas
 nltk
-spacy
+spacy==3.5.3
 jellyfish
 sphinx
 furo
@@ -9,3 +10,7 @@ sphinx-copybutton
 twine
 scipy
 Flask
+pydantic==1.10.2
+typing_extensions<4.6.0 
+
+
