@@ -35,12 +35,12 @@ try:
 except:
     SKILL_DB = bucket.fetch_remote("SKILL_DB")
     # dump data
-    with open('buckets/skill_db_relax_20.json', 'w') as fp:
+    with open('skill_db_relax_20.json', 'w') as fp:
         json.dump(SKILL_DB, fp)
 
 # load token distribution dict
 try:
-    with open('token_dist.json') as json_file:
+    with open('buckets/token_dist.json') as json_file:
         TOKEN_DIST = json.load(json_file)
 except:
     TOKEN_DIST = bucket.fetch_remote("TOKEN_DIST")
