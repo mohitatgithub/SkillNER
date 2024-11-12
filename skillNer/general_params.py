@@ -30,12 +30,12 @@ bucket = RemoteBucket(
 # load local data
 # else fetch remote data and save it
 try:
-    with open('skill_db_relax_20.json') as json_file:
+    with open('buckets/skill_db_relax_20.json') as json_file:
         SKILL_DB = json.load(json_file)
 except:
     SKILL_DB = bucket.fetch_remote("SKILL_DB")
     # dump data
-    with open('skill_db_relax_20.json', 'w') as fp:
+    with open('buckets/skill_db_relax_20.json', 'w') as fp:
         json.dump(SKILL_DB, fp)
 
 # load token distribution dict
