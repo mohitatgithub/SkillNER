@@ -1,0 +1,10 @@
+services:
+  skillner-api:
+    build: .
+    image: skillner:latest
+    container_name: skillner-api
+    ports:
+      - "5065:5065"
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped

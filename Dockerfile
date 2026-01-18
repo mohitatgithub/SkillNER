@@ -1,24 +1,38 @@
-FROM python:3.8.3-slim-buster
+FROM python:3.9-slim-bookworm
 
-RUN apt-get update && apt-get install -y build-essential
+# System dependencies required for spaCy / numpy
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
-
+# Locale settings
 ENV LC_ALL=C.UTF-8
-
 ENV LANG=C.UTF-8
 
-COPY . /app
-
+# Set workdir
 WORKDIR /app
 
-RUN pip install --upgrade pip
-RUN pip3 install -r requirements.txt
+# Copy source code
+COPY . /app
 
+# Create logs directory inside image
+RUN mkdir -p /app/logs
+
+# Upgrade pip
+RUN pip install --upgrade pip
+
+# Pin numpy first (avoids binary incompatibility)
+RUN pip install numpy==1.23.5
+
+# Install remaining dependencies
+RUN pip install -r requirements.txt
+
+# Download spaCy model at build time
 RUN python -m spacy download en_core_web_lg
 
+# Expose Flask port
 EXPOSE 5065
 
-CMD ["python3", "./app.py"]
-
-
+# Run the app
+CMD ["python", "app.py"]
